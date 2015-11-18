@@ -1,0 +1,9 @@
+= simple_form_for @category do |f|
+	= f.error_notification
+ 
+	= field_set_tag t('category.category_details') do
+		%dl
+			%dd= f.input :name
+		%dl.cleared
+			%dd= f.input :description
+			=f.button :submit 
