@@ -37,6 +37,11 @@ class CategoriesController < ApplicationController
 		redirect_to categories_path
 	end
 
+	def show
+		@category = Category.find(params[:id])
+		@subcategory = @category.subcategories.new
+  	end
+
 	private
 
 	def category_params
