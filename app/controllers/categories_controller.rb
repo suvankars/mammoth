@@ -39,8 +39,9 @@ class CategoriesController < ApplicationController
 
 	def show
 		@category = Category.find(params[:id])
+		@subcategories = @category.subcategories.all
 		@subcategory = @category.subcategories.new
-  	end
+  end
 
 	private
 
