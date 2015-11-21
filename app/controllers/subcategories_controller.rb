@@ -3,7 +3,7 @@ class SubcategoriesController < ApplicationController
 		@category = Category.find(params[:category_id])
 		@subcategory = @category.subcategories.create(subcategory_params)
 		if @subcategory.save
-			redirect_to category_path(@category), :flash => { :notice => "Successfully creayed subcategory " }
+			redirect_to category_path(@category), :flash => { :notice => "Successfully created  subcategory " }
 		else
 			redirect_to category_path(@category), :flash => { :notice => "Something went wrong" }
 		end
@@ -22,6 +22,11 @@ class SubcategoriesController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def show
+    @category = Category.find(params[:category_id])
+    @subcategory = @category.subcategories.find(params[:id])
   end
 
 	private
