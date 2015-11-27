@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151121204716) do
+ActiveRecord::Schema.define(version: 20151124162947) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -20,12 +20,27 @@ ActiveRecord::Schema.define(version: 20151121204716) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "product_fields", force: :cascade do |t|
+    t.string   "name"
+    t.string   "field_type"
+    t.boolean  "require"
+    t.integer  "subcategory_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "product_fields", ["subcategory_id"], name: "index_product_fields_on_subcategory_id"
+
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.string   "skuid"
     t.string   "brand"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "subcategory_id"
+    t.string   "integer"
+    t.string   "properties"
+    t.string   "text"
   end
 
   create_table "subcategories", force: :cascade do |t|

@@ -14,7 +14,7 @@
     = favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
     = favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
     = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
-    = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
+    //= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag "application"
 
 
@@ -30,8 +30,8 @@
           %ul.nav.navbar-nav
             %li= link_to "Categories", "/categories"
             %li= link_to "Products", "/products"
-            %li= link_to "Dashboard", "/path3"
-            %li= link_to "About us", "/path3"
+            %li= link_to "Dashboard", "#"
+            %li= link_to "About us", "#"
 
     .container
       .row
@@ -42,7 +42,7 @@
           .well.sidebar-nav
             %h3 Search category
             %ul.nav.nav-list
-              %li= link_to "Link 1", "/path1"
+              %li= link_to "Link 1", "/#"
               = form_tag categories_path, :class => "navbar-search pull-left", :method => :get do
                 = text_field_tag :name, nil, :class => "search-query span3", :placeholder => "Search category"
                 = button_to 'Find'

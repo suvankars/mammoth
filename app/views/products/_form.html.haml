@@ -1,9 +1,13 @@
 = simple_form_for @product, :html => { :class => 'form-horizontal' } do |f|
+  = f.hidden_field :subcategory_id
   = f.input :name
   = error_span(@product[:name])
   = f.input :skuid
   = error_span(@product[:skuid])
   = f.input :brand
   = error_span(@product[:brand])
+  = f.fields_for :properties, OpenStruct.new(@product.properties) do |builder|
+    - @product.subcategory.fields.each do |field|
+      = render "products/fields/#{field.field_type}", field: field, f:builder 
   = f.button :submit, :class => 'btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), products_path, :class => 'btn btn-default'

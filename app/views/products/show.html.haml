@@ -14,7 +14,10 @@
   %strong= model_class.human_attribute_name(:brand) + ':'
   %br
   = @product.brand
-
+%p
+  %strong= model_class.human_attribute_name(:subcategory) + ':'
+  %br
+  = @product.subcategory.name
 
 = link_to t('.back', :default => t("helpers.links.back")), products_path, :class => 'btn btn-default'
 = link_to t('.edit', :default => t("helpers.links.edit")), edit_product_path(@product), :class => 'btn btn-default'

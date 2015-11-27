@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
+    @cat = Category.all
   end
 
   # GET /products/1
@@ -14,11 +15,13 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
+    @product = Product.new(subcategory_id: params[:subcategory_id])
+    @product
   end
 
   # GET /products/1/edit
   def edit
+    @product = Product.find(params[:id])
   end
 
   # POST /products
@@ -69,6 +72,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :skuid, :brand)
+      params.require(:product).permit(:name, :skuid, :brand, :subcategory_id, properties: params[:product][:properties].try(:keys))
     end
 end
