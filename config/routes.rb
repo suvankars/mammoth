@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'dashboard' => 'dashboard#index'
+
   resources :products
   get 'welcome/index'
 
