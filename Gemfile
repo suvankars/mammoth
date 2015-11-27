@@ -49,4 +49,4 @@ end
 
 gem "twitter-bootstrap-rails"
 gem "less-rails" 
-
+gem 'react-rails'
