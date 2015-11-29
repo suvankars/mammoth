@@ -1,0 +1,25 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: mammoth_development
+  pool: 5
+
+
+test: &TEST
+  adapter: postgresql
+  encoding: unicode
+  database: mammoth_test
+  pool: 5
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: mammoth_production
+  pool: 5
+
