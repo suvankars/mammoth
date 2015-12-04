@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :suppliers
   get 'dashboard' => 'dashboard#index'
 
   resources :products

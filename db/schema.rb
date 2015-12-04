@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124162947) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20151204033127) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -32,7 +29,7 @@ ActiveRecord::Schema.define(version: 20151124162947) do
     t.datetime "updated_at",     null: false
   end
 
-  add_index "product_fields", ["subcategory_id"], name: "index_product_fields_on_subcategory_id", using: :btree
+  add_index "product_fields", ["subcategory_id"], name: "index_product_fields_on_subcategory_id"
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
@@ -54,8 +51,15 @@ ActiveRecord::Schema.define(version: 20151124162947) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "subcategories", ["category_id"], name: "index_subcategories_on_category_id", using: :btree
+  add_index "subcategories", ["category_id"], name: "index_subcategories_on_category_id"
 
-  add_foreign_key "product_fields", "subcategories"
-  add_foreign_key "subcategories", "categories"
+  create_table "suppliers", force: :cascade do |t|
+    t.string   "company"
+    t.string   "code"
+    t.string   "status"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
 end
