@@ -8,11 +8,13 @@
   = f.input :description
   = error_span(@supplier[:description])
 
-  / - if @contact.nil?
-  /   %h4= 'No contact information provided'
-  /   = link_to t('.add contact', :default => t("helpers.links.add")), new_supplier_contact_path(@supplier, @contact), :class => 'btn btn-default'
-  / - else 
+  %h4= 'Contact Information'
   = render "contact_form"
+
+  %h4= 'Address'
+  - @addresses.each do |address|
+    - @address = address
+    = render "address_form", object: @address
   
    
   

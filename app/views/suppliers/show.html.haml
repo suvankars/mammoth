@@ -21,6 +21,9 @@
 %p
   %br
   = render 'contacts/show'
+  - @addresses.each do |address|
+    - @address = address
+    = render 'addresses/show', object: @address
 
 
 = link_to t('.back', :default => t("helpers.links.back")), suppliers_path, :class => 'btn btn-default'

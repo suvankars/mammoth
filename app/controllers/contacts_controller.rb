@@ -23,7 +23,7 @@ class ContactsController < ApplicationController
 
   def destroy
     @contact.destroy
-    redirect_to suppliers_url, notice: 'Supplier was successfully destroyed.' 
+    redirect_to suppliers_url, notice: 'Contact was successfully destroyed.' 
   end
 
 private

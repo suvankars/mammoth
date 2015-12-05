@@ -16,6 +16,7 @@ class SuppliersController < ApplicationController
   def new
     @supplier = Supplier.new
     @contact = Contact.new
+    @address = Address.new
   end
 
   # GET /suppliers/1/edit
@@ -32,9 +33,10 @@ class SuppliersController < ApplicationController
   def create
     @supplier = Supplier.new(supplier_params)
     supplier_contact = @supplier.build_contact(contact_params)  
+    supplier_address = @supplier.address.new(address_params)  
 
     respond_to do |format|
-      if supplier_contact.save
+      if supplier_contact.save and supplier_address.save
         format.html { redirect_to @supplier, notice: 'Supplier was successfully created.' }
         format.json { render :show, status: :created, location: @supplier }
       else
@@ -44,8 +46,6 @@ class SuppliersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /suppliers/1
-  # PATCH/PUT /suppliers/1.json
   def update_contact
     if @supplier.contact.nil?
       @contact = @supplier.build_contact(contact_params)
@@ -54,17 +54,26 @@ class SuppliersController < ApplicationController
       @contact.update(contact_params)
     end
   end
+
+  def update_address
+    @address = Address.find(params[:address][:id])
+
+    if @supplier.address.nil?
+      address = @supplier.address.new(address_params)
+      address.save
+    else
+      @address.update(address_params)
+    end
+  end
   
   def update
-    
-    else
-      respond_to do |format|
-        if @supplier.update(supplier_params) and update_contact
-          format.html { redirect_to @supplier, notice: 'Supplier was successfully updated.' }
-          format.json { render :show, status: :ok, location: @supplier }
-        else
-          format.html { render :edit }
-          format.json { render json: @supplier.errors, status: :unprocessable_entity }
+    respond_to do |format|
+      if @supplier.update(supplier_params) and update_contact and update_address
+        format.html { redirect_to @supplier, notice: 'Supplier was successfully updated.' }
+        format.json { render :show, status: :ok, location: @supplier }
+      else
+        format.html { render :edit }
+        format.json { render json: @supplier.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -80,19 +89,23 @@ class SuppliersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_supplier
       @supplier = Supplier.find(params[:id])
       @contact = @supplier.contact
+      @addresses = @supplier.address.all
+      
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def supplier_params
       params.require(:supplier).permit(:company, :code, :status, :description)
     end
 
     def contact_params
       params.require(:contact).permit(:email, :telephone, :fax, :mobile, :website, :skype, :supplier_id)
+    end
+
+    def address_params
+      params.require(:address).permit(:name, :pincode, :address_line_1, :address_line_2, :city, :state, :country, :supplier_id)
     end
 end
 
