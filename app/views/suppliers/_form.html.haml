@@ -1,11 +1,21 @@
-= simple_form_for(@supplier) do |f|
-  = f.error_notification
+= simple_form_for @supplier, :html => { :class => 'form-horizontal' } do |f|
+  = f.input :company
+  = error_span(@supplier[:company])
+  = f.input :code
+  = error_span(@supplier[:code])
+  = f.input :status
+  = error_span(@supplier[:status])
+  = f.input :description
+  = error_span(@supplier[:description])
 
-  .form-inputs
-    = f.input :company
-    = f.input :code
-    = f.input :status
-    = f.input :description
+  / - if @contact.nil?
+  /   %h4= 'No contact information provided'
+  /   = link_to t('.add contact', :default => t("helpers.links.add")), new_supplier_contact_path(@supplier, @contact), :class => 'btn btn-default'
+  / - else 
+  = render "contact_form"
+  
+   
+  
+  = f.button :submit, :class => 'btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), suppliers_path, :class => 'btn btn-default'
 
-  .form-actions
-    = f.button :submit

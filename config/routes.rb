@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   
-  resources :suppliers
+  resources :suppliers do
+    resources :contacts
+  end
+  
   get 'dashboard' => 'dashboard#index'
 
   resources :products
