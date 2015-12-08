@@ -17,15 +17,13 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.new
     @contact = Contact.new
     @address = Address.new
+    @finance = Finance.new
   end
 
-  # GET /suppliers/1/edit
   def edit
-    @contact = @supplier.contact
-    if @contact.nil?
-      @contact = Contact.new
-    end
-    @contact
+    @contact = Contact.new if @contact.nil?
+    @address = Address.new if @addresses.empty?
+    @finance = Finance.new if @finance.nil?
   end
 
   # POST /suppliers
@@ -34,9 +32,10 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.new(supplier_params)
     supplier_contact = @supplier.build_contact(contact_params)  
     supplier_address = @supplier.address.new(address_params)  
+    supplier_finance = @supplier.create_finance(finance_params)
 
     respond_to do |format|
-      if supplier_contact.save and supplier_address.save
+      if supplier_contact.save and supplier_address.save and supplier_finance.save
         format.html { redirect_to @supplier, notice: 'Supplier was successfully created.' }
         format.json { render :show, status: :created, location: @supplier }
       else
@@ -55,6 +54,12 @@ class SuppliersController < ApplicationController
     end
   end
 
+  def update_finance
+    if !@finance.nil?
+      @finance.update(finance_params)
+    end
+  end
+
   def update_address
     @address = Address.find(params[:address][:id])
 
@@ -68,7 +73,7 @@ class SuppliersController < ApplicationController
   
   def update
     respond_to do |format|
-      if @supplier.update(supplier_params) and update_contact and update_address
+      if @supplier.update(supplier_params) and update_contact and update_address and update_finance
         format.html { redirect_to @supplier, notice: 'Supplier was successfully updated.' }
         format.json { render :show, status: :ok, location: @supplier }
       else
@@ -78,8 +83,6 @@ class SuppliersController < ApplicationController
     end
   end
 
-  # DELETE /suppliers/1
-  # DELETE /suppliers/1.json
   def destroy
     @supplier.destroy
     respond_to do |format|
@@ -93,7 +96,7 @@ class SuppliersController < ApplicationController
       @supplier = Supplier.find(params[:id])
       @contact = @supplier.contact
       @addresses = @supplier.address.all
-      
+      @finance = @supplier.finance
     end
 
     def supplier_params
@@ -106,6 +109,10 @@ class SuppliersController < ApplicationController
 
     def address_params
       params.require(:address).permit(:name, :pincode, :address_line_1, :address_line_2, :city, :state, :country, :supplier_id)
+    end
+
+    def finance_params
+      params.require(:finance).permit(:price_list, :currency, :tax_code, :email, :registration_number, :payment_method, :credit_limit, :credit_lead_time , :bank_name, :account_number, :IFSC_code)
     end
 end
 

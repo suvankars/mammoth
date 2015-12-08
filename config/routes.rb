@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :suppliers do
     resources :contacts
     resources :addresses
+    resources :finances
   end
   
   get 'dashboard' => 'dashboard#index'

@@ -12,11 +12,16 @@
   = render "contact_form"
 
   %h4= 'Address'
-  - @addresses.each do |address|
-    - @address = address
-    = render "address_form", object: @address
+  - if !@addresses.empty?
+    - @addresses.each do |address|
+      = render "address_form", object: address
+  - else
+    = render "address_form"
+
   
-   
+
+  %h4= 'Financial Information' 
+  = render "finance_form" 
   
   = f.button :submit, :class => 'btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), suppliers_path, :class => 'btn btn-default'

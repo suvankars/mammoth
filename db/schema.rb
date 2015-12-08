@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151205185115) do
+ActiveRecord::Schema.define(version: 20151206074319) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name"
@@ -48,6 +48,25 @@ ActiveRecord::Schema.define(version: 20151205185115) do
   end
 
   add_index "contacts", ["supplier_id"], name: "index_contacts_on_supplier_id"
+
+  create_table "finances", force: :cascade do |t|
+    t.string   "price_list"
+    t.string   "currency"
+    t.string   "tax_code"
+    t.string   "email"
+    t.string   "registration_number"
+    t.string   "payment_method"
+    t.integer  "credit_limit"
+    t.integer  "credit_lead_time"
+    t.string   "bank_name"
+    t.integer  "account_number"
+    t.string   "IFSC_code"
+    t.integer  "supplier_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "finances", ["supplier_id"], name: "index_finances_on_supplier_id"
 
   create_table "product_fields", force: :cascade do |t|
     t.string   "name"

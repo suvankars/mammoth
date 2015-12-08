@@ -20,10 +20,14 @@
   = @supplier.description
 %p
   %br
-  = render 'contacts/show'
-  - @addresses.each do |address|
-    - @address = address
-    = render 'addresses/show', object: @address
+  - if !@contact.nil?
+    = render 'contacts/show'
+  - if !@addresses.nil?
+    - @addresses.each do |address|
+      - @address = address
+      = render 'addresses/show', object: @address
+  - if !@finance.nil?
+    = render 'finances/show'
 
 
 = link_to t('.back', :default => t("helpers.links.back")), suppliers_path, :class => 'btn btn-default'
