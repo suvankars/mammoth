@@ -57,3 +57,4 @@ gem "twitter-bootstrap-rails"
 gem "less-rails" 
 gem 'country_select'
 gem 'rails_12factor', group: :production
+gem 'wicked'

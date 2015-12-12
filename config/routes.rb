@@ -6,6 +6,14 @@ Rails.application.routes.draw do
     resources :finances
   end
   
+  resource :supplier_steps do
+    member do
+      get 'contact'
+      get 'financial'
+      get 'address'
+    end
+  end
+  
   get 'dashboard' => 'dashboard#index'
 
   resources :products
