@@ -30,17 +30,17 @@ class SuppliersController < ApplicationController
   # POST /suppliers.json
   def create
     @supplier = Supplier.new(supplier_params)
-    supplier_contact = @supplier.build_contact(contact_params)  
-    supplier_address = @supplier.address.new(address_params)  
-    supplier_finance = @supplier.create_finance(finance_params)
-
+    #supplier_contact = @supplier.build_contact(contact_params)  
+   # @address = @supplier.address.new() 
+   
+    #supplier_finance = @supplier.create_finance(finance_params)
     respond_to do |format|
-      if supplier_contact.save and supplier_address.save and supplier_finance.save
-        format.html { redirect_to @supplier, notice: 'Supplier was successfully created.' }
-        format.json { render :show, status: :created, location: @supplier }
+      if @supplier.save #supplier_contact.save #and supplier_address.save and supplier_finance.save
+
+        format.html { redirect_to registration_steps_path(supplier_id: @supplier), notice: 'Supplier was successfully created.'}
+        #format.html { redirect_to @supplier, notice: 'Supplier was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @supplier.errors, status: :unprocessable_entity }
       end
     end
   end

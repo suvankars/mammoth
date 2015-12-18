@@ -1,33 +1,30 @@
 Rails.application.routes.draw do
   
+  scope "suppliers/:supplier_id" do
+    resources :registration_steps
+  end
+
   resources :suppliers do
     resources :contacts
     resources :addresses
     resources :finances
   end
   
-  resource :supplier_steps do
-    member do
-      get 'contact'
-      get 'financial'
-      get 'address'
-    end
-  end
   
   get 'dashboard' => 'dashboard#index'
 
   resources :products
-  get 'welcome/index'
 
   resources :categories do
     resources :subcategories
   end
+
   # The priority is based upon order of creation: first created -> highest priority.
-  root 'welcome#index'
+  #root 'welcome#index'
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+   root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -58,3 +58,5 @@ gem "less-rails"
 gem 'country_select'
 gem 'rails_12factor', group: :production
 gem 'wicked'
+gem 'pry'
+gem 'pry-nav'

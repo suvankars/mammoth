@@ -1,4 +1,4 @@
-= simple_fields_for @contact, :html => { :class => 'form-horizontal' } do |f|
+= simple_form_for contact, :url => wizard_path, :method => :put, :html => { :class => 'form-group' } do |f|
   = f.input :email
   = error_span(@contact[:email])
   = f.input :telephone
@@ -14,4 +14,6 @@
   = f.input :supplier_id
   = error_span(@contact[:supplier_id])
   = f.button :submit, :class => 'btn-primary'
+  or
+  = link_to "Skip", next_wizard_path, :class => "btn btn-warning"
   /= link_to t('.cancel', :default => t("helpers.links.cancel")), supplier_contacts_path, :class => 'btn btn-default'
