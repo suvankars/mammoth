@@ -16,13 +16,12 @@ class RegistrationStepsController < ApplicationController
   end
   
   def update_address
-    @address = Address.find(params[:address][:id])
-
-    if @supplier.address.nil?
+    if @supplier.address.empty?
       address = @supplier.address.new(address_params)
       address.save
     else
-      @address.update(address_params)
+      address = Address.find(params[:address][:id])
+      address.update(address_params)
     end
   end
 
