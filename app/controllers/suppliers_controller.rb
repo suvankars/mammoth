@@ -31,13 +31,13 @@ class SuppliersController < ApplicationController
   def create
     @supplier = Supplier.new(supplier_params)
     #supplier_contact = @supplier.build_contact(contact_params)  
-   # @address = @supplier.address.new() 
+    #@address = @supplier.address.new() 
    
     #supplier_finance = @supplier.create_finance(finance_params)
     respond_to do |format|
       if @supplier.save #supplier_contact.save #and supplier_address.save and supplier_finance.save
 
-        format.html { redirect_to registration_steps_path(supplier_id: @supplier), notice: 'Supplier was successfully created.'}
+        format.html { redirect_to registration_steps_path(supplier_id: @supplier)}
         #format.html { redirect_to @supplier, notice: 'Supplier was successfully created.' }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class SuppliersController < ApplicationController
   def update_contact
     if @supplier.contact.nil?
       @contact = @supplier.build_contact(contact_params)
-      @contact.save
+      @contact.save 
     else
       @contact.update(contact_params)
     end
@@ -73,8 +73,9 @@ class SuppliersController < ApplicationController
   
   def update
     respond_to do |format|
-      if @supplier.update(supplier_params) and update_contact and update_address and update_finance
-        format.html { redirect_to @supplier, notice: 'Supplier was successfully updated.' }
+      #if @supplier.update(supplier_params) and update_contact and update_address and update_finance
+       if @supplier.update(supplier_params)
+        format.html { redirect_to registration_steps_path(supplier_id: @supplier)}
         format.json { render :show, status: :ok, location: @supplier }
       else
         format.html { render :edit }

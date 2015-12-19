@@ -1,3 +1,7 @@
 .content
  %h4= 'Address details'
- = render "suppliers/address_form", address: @address
+ - if !@addresses.empty?
+  - @addresses.each do |address|
+   = render "suppliers/address_form", address: address
+ - else
+  = render "suppliers/address_form", address: @address

@@ -1,14 +1,38 @@
 class RegistrationStepsController < ApplicationController
  include Wicked::Wizard
+ before_action :set_supplier, only: [:show, :edit, :update, :destroy]
 
   steps :address, :contact, :financial
   
   def show
     @supplier = Supplier.find(params[:supplier_id])
-    @address = @supplier.address.new() 
-    @contact = Contact.new
-    @finance = Finance.new
+    #@address = @supplier.address.first.nil?? @supplier.address.new() : @supplier.address.first
+    #@contact = Contact.new
+    #@finance = Finance.new
+    @contact = Contact.new if @contact.nil?
+    @address = Address.new if @addresses.empty?
+    @finance = Finance.new if @finance.nil?
     render_wizard
+  end
+  
+  def update_address
+    @address = Address.find(params[:address][:id])
+
+    if @supplier.address.nil?
+      address = @supplier.address.new(address_params)
+      address.save
+    else
+      @address.update(address_params)
+    end
+  end
+
+  def update_contact
+    if @supplier.contact.nil?
+      @contact = @supplier.build_contact(contact_params)
+      @contact.save 
+    else
+      @contact.update(contact_params)
+    end
   end
 
   def update
@@ -17,9 +41,9 @@ class RegistrationStepsController < ApplicationController
     case step
 
     when :address
-      @supplier = @supplier.address.new(address_params) 
+      @supplier = @supplier if update_address
     when :contact
-      @supplier = @supplier.build_contact(contact_params)
+      @supplier = @supplier if update_contact
     when :financial
       @supplier = @supplier.create_finance(finance_params)
         
@@ -30,10 +54,10 @@ class RegistrationStepsController < ApplicationController
 
    private
     def set_supplier
-      #@supplier = Supplier.last#find(params[:id])
-      #@contact = @supplier.build_contact
-      #@addresses = @supplier.address.all
-      #@finance = @supplier.finance
+      @supplier = Supplier.find(params[:supplier_id])
+      @contact = @supplier.contact
+      @addresses = @supplier.address.all
+      @finance = @supplier.finance
     end
 
 
@@ -50,6 +74,6 @@ class RegistrationStepsController < ApplicationController
     end
 
     def finish_wizard_path
-      supplier_path(@supplier)
+      supplier_path(@supplier)#, notice: 'Supplier was successfully created.'
     end
 end
