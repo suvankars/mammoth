@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206074319) do
+ActiveRecord::Schema.define(version: 20151223190214) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name"
@@ -68,6 +68,26 @@ ActiveRecord::Schema.define(version: 20151206074319) do
 
   add_index "finances", ["supplier_id"], name: "index_finances_on_supplier_id"
 
+  create_table "line_items", force: :cascade do |t|
+    t.integer  "quantity"
+    t.decimal  "price"
+    t.decimal  "base_price"
+    t.integer  "purchase_order_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "line_items", ["purchase_order_id"], name: "index_line_items_on_purchase_order_id"
+
+  create_table "procurements", force: :cascade do |t|
+    t.date     "received_at"
+    t.integer  "purchase_order_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "procurements", ["purchase_order_id"], name: "index_procurements_on_purchase_order_id"
+
   create_table "product_fields", force: :cascade do |t|
     t.string   "name"
     t.string   "field_type"
@@ -90,6 +110,22 @@ ActiveRecord::Schema.define(version: 20151206074319) do
     t.string   "properties"
     t.string   "text"
   end
+
+  create_table "purchase_orders", force: :cascade do |t|
+    t.date     "due_date"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "po_number"
+    t.string   "procurement_status"
+    t.string   "status"
+    t.boolean  "tax_inclusive"
+    t.text     "message"
+    t.integer  "supplier_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "purchase_orders", ["supplier_id"], name: "index_purchase_orders_on_supplier_id"
 
   create_table "subcategories", force: :cascade do |t|
     t.string   "name"

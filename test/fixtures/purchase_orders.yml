@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  due_date: 2015-12-24
+  email: MyString
+  phone_number: MyString
+  po_number: MyString
+  procurement_status: MyString
+  status: MyString
+  tax_inclusive: false
+  message: MyText
+  supplier_id: 
+
+two:
+  due_date: 2015-12-24
+  email: MyString
+  phone_number: MyString
+  po_number: MyString
+  procurement_status: MyString
+  status: MyString
+  tax_inclusive: false
+  message: MyText
+  supplier_id: 

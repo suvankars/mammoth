@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :addresses
     resources :finances
   end
+
+  resources :purchase_orders
   
   
   get 'dashboard' => 'dashboard#index'
