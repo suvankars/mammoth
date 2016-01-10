@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'purchase_orders/index'
+
   scope "suppliers/:supplier_id" do
     resources :registration_steps
   end
