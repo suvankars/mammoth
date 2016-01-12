@@ -16,7 +16,8 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new(subcategory_id: params[:subcategory_id])
-    @product
+    @subcategory_names = Subcategory.all.map{|sub| sub.name }
+    @supplier_names = Supplier.all.map{|sup| sup.company }
   end
 
   # GET /products/1/edit
