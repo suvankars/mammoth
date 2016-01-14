@@ -1,7 +1,4 @@
-%h1 Editing tax_rate
-
-= render 'form'
-
-= link_to 'Show', @tax_rate
-\|
-= link_to 'Back', tax_rates_path
+- model_class = TaxRate
+.page-header
+  %h1=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize
+= render :partial => "form"

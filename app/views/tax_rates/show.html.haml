@@ -1,18 +1,25 @@
-%p#notice= notice
+- model_class = TaxRate
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
 
 %p
-  %b Name:
+  %strong= model_class.human_attribute_name(:name) + ':'
+  %br
   = @tax_rate.name
 %p
-  %b Code:
+  %strong= model_class.human_attribute_name(:code) + ':'
+  %br
   = @tax_rate.code
 %p
-  %b Description:
+  %strong= model_class.human_attribute_name(:description) + ':'
+  %br
   = @tax_rate.description
 %p
-  %b Rate:
+  %strong= model_class.human_attribute_name(:rate) + ':'
+  %br
   = @tax_rate.rate
 
-= link_to 'Edit', edit_tax_rate_path(@tax_rate)
-\|
-= link_to 'Back', tax_rates_path
+
+= link_to t('.back', :default => t("helpers.links.back")), tax_rates_path, :class => 'btn btn-default'
+= link_to t('.edit', :default => t("helpers.links.edit")), edit_tax_rate_path(@tax_rate), :class => 'btn btn-default'
+= link_to t('.destroy', :default => t("helpers.links.destroy")), tax_rate_path(@tax_rate), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
