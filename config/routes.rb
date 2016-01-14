@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   
   get 'dashboard' => 'dashboard#index'
 
-  resources :products
+  resources :products do
+    resources :variants
+  end
 
   resources :categories do
     resources :subcategories
