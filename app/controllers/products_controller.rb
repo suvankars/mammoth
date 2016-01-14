@@ -22,6 +22,8 @@ class ProductsController < ApplicationController
     @default_brand = @brand_names.first
     @default_subcategory = @subcategory_names.first
     @default_supplier  = @subcategory_names.first
+    @tax_rates = TaxRate.all.map{|tr| [tr.tax_description, tr.id]}
+    @default_tax_rate = @tax_rates.first
   end
 
   # GET /products/1/edit
@@ -33,6 +35,8 @@ class ProductsController < ApplicationController
     @default_brand =  [@product.brand.name, @product.brand.id ]
     @default_subcategory = [@product.subcategory.name, @product.subcategory.id]
     @default_supplier = [@product.supplier.company, @product.supplier.id]
+    @tax_rates = TaxRate.all.map{|tr| [tr.tax_description, tr.id]}
+    @default_tax_rate = [@product.tax_rate.tax_description, @product.tax_rate.id]
   end
 
   # POST /products
@@ -83,6 +87,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :skuid, :brand_id, :subcategory_id, :supplier_id, properties: params[:product][:properties].try(:keys))
+      params.require(:product).permit(:name, :skuid, :brand_id, :tax_rate_id, :subcategory_id, :supplier_id, properties: params[:product][:properties].try(:keys))
     end
 end

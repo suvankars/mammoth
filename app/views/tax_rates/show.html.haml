@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @tax_rate.name
+%p
+  %b Code:
+  = @tax_rate.code
+%p
+  %b Description:
+  = @tax_rate.description
+%p
+  %b Rate:
+  = @tax_rate.rate
+
+= link_to 'Edit', edit_tax_rate_path(@tax_rate)
+\|
+= link_to 'Back', tax_rates_path

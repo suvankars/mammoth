@@ -1,0 +1,27 @@
+%h1 Listing tax_rates
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Code
+      %th Description
+      %th Rate
+      %th
+      %th
+      %th
+
+  %tbody
+    - @tax_rates.each do |tax_rate|
+      %tr
+        %td= tax_rate.name
+        %td= tax_rate.code
+        %td= tax_rate.description
+        %td= tax_rate.rate
+        %td= link_to 'Show', tax_rate
+        %td= link_to 'Edit', edit_tax_rate_path(tax_rate)
+        %td= link_to 'Destroy', tax_rate, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Tax rate', new_tax_rate_path

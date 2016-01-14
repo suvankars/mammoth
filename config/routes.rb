@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :tax_rates
   resources :brands
   resources :brands
   resources :brands
