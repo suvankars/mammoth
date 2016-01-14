@@ -1,0 +1,27 @@
+%h1 Listing brands
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Short description
+      %th Description
+      %th Location
+      %th
+      %th
+      %th
+
+  %tbody
+    - @brands.each do |brand|
+      %tr
+        %td= brand.name
+        %td= brand.short_description
+        %td= brand.description
+        %td= brand.location
+        %td= link_to 'Show', brand
+        %td= link_to 'Edit', edit_brand_path(brand)
+        %td= link_to 'Destroy', brand, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Brand', new_brand_path

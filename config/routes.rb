@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  resources :brands
+  resources :brands
+  resources :brands
   scope "suppliers/:supplier_id" do
     resources :registration_steps
   end

@@ -5,4 +5,6 @@ class Product < ActiveRecord::Base
   has_many :fields, class_name: "ProductField"
   accepts_nested_attributes_for :fields, allow_destroy: true
   belongs_to :supplier
+  belongs_to :brand
+  has_one :brand
 end

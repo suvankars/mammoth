@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112170904) do
+ActiveRecord::Schema.define(version: 20160114164038) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 20160112170904) do
   end
 
   add_index "addresses", ["supplier_id"], name: "index_addresses_on_supplier_id"
+
+  create_table "brands", force: :cascade do |t|
+    t.string   "name"
+    t.string   "short_description"
+    t.text     "description"
+    t.string   "location"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -83,8 +92,16 @@ ActiveRecord::Schema.define(version: 20160112170904) do
     t.string   "name"
     t.string   "skuid"
     t.string   "brand"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "permalink"
+    t.text     "description"
+    t.text     "short_description"
+    t.boolean  "active",                                    default: true
+    t.decimal  "quantity",          precision: 8, scale: 3, default: 0.0
+    t.decimal  "price",             precision: 8, scale: 2, default: 0.0
+    t.decimal  "cost_price",        precision: 8, scale: 2, default: 0.0
+    t.boolean  "stock_control",                             default: true
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
     t.string   "subcategory_id"
     t.string   "integer"
     t.string   "properties"

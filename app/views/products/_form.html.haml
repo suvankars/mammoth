@@ -2,12 +2,27 @@
   = f.hidden_field :subcategory_id
   = f.input :name
   = error_span(@product[:name])
-  = f.input :source_type, :label => "Product Type", :collection => @subcategory_names, :selected => @subcategory_names.first 
-  = f.input :source_type, :label => "Supplier", :collection => @supplier_names, :selected => @supplier_names.first
+  = f.input :supplier_id, collection: @supplier_names, :selected => @default_supplier 
+  = f.input :subcategory_id, :label => "Product Category", :collection => @subcategory_names, :selected => @default_subcategory
+  = f.input :brand_id, :label => "Brand", :collection => @brand_names, :selected => @default_brand
+  = error_span(@product[:brand])
   = f.input :skuid
   = error_span(@product[:skuid])
-  = f.input :brand
-  = error_span(@product[:brand])
+  = f.input :permalink
+  = error_span(@product[:permalink])
+  = f.input :description
+  = error_span(@product[:description])
+  = f.input :short_description
+  = error_span(@product[:short_description])
+
+  = f.input :price
+  = error_span(@product[:price])
+  = f.input :cost_price
+  = error_span(@product[:cost_price])
+  = f.input :tax_rate_id, :label => "Brand", :collection => @brand_names, :selected => @default_tax_rate
+  
+
+   
   = f.fields_for :properties, OpenStruct.new(@product.properties) do |builder|
     - if !@product.subcategory.nil?
       - @product.subcategory.fields.each do |field|

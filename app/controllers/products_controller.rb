@@ -16,13 +16,23 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new(subcategory_id: params[:subcategory_id])
-    @subcategory_names = Subcategory.all.map{|sub| sub.name }
-    @supplier_names = Supplier.all.map{|sup| sup.company }
+    @subcategory_names = Subcategory.all.map{|sub| [sub.name, sub.id] }
+    @supplier_names = Supplier.all.map{|sup| [sup.company, sup.id]}
+    @brand_names = Brand.all.map{|br| [br.name, br.id]}
+    @default_brand = @brand_names.first
+    @default_subcategory = @subcategory_names.first
+    @default_supplier  = @subcategory_names.first
   end
 
   # GET /products/1/edit
   def edit
     @product = Product.find(params[:id])
+    @subcategory_names = Subcategory.all.map{|sub| [sub.name, sub.id] }
+    @supplier_names = Supplier.all.map{|sup| [sup.company, sup.id]}
+    @brand_names = Brand.all.map{|br| [br.name, br.id]}
+    @default_brand =  [@product.brand.name, @product.brand.id ]
+    @default_subcategory = [@product.subcategory.name, @product.subcategory.id]
+    @default_supplier = [@product.supplier.company, @product.supplier.id]
   end
 
   # POST /products
@@ -73,6 +83,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :skuid, :brand, :subcategory_id, properties: params[:product][:properties].try(:keys))
+      params.require(:product).permit(:name, :skuid, :brand_id, :subcategory_id, :supplier_id, properties: params[:product][:properties].try(:keys))
     end
 end
