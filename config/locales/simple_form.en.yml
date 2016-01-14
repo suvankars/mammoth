@@ -29,3 +29,5 @@ en:
     # prompts:
     #   defaults:
     #     age: 'Select your age'
+    variants:
+      no_products: 'No products to display.'

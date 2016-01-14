@@ -21,3 +21,6 @@
 
 en:
   hello: "Hello world"
+  variants:
+      no_products: 'No products to display.'
+      variants_of: 'Variants of %{product}'
