@@ -25,6 +25,9 @@ class ProductsController < ApplicationController
     @default_supplier  = @subcategory_names.first
     @tax_rates = TaxRate.all.map{|tr| [tr.tax_description, tr.id]}
     @default_tax_rate = @tax_rates.first
+
+    @sizes = Size.all.map{|s| [s.description, s.id]}
+    @default_size = @sizes.first
   end
 
   # GET /products/1/edit

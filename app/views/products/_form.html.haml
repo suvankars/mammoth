@@ -19,9 +19,12 @@
   = error_span(@product[:price])
   = f.input :cost_price
   = error_span(@product[:cost_price])
-  = f.input :tax_rate_id, :label => "variants.tax_rate", :collection => @tax_rates, :selected => @default_tax_rate
-  
+  = f.input :tax_rate_id, :collection => @tax_rates, :selected => @default_tax_rate
 
+  = f.input :size_id, :collection => @sizes, :selected => @default_size
+    
+  = f.input :quantity
+  = error_span(@product[:quantity])
    
   = f.fields_for :properties, OpenStruct.new(@product.properties) do |builder|
     - if !@product.subcategory.nil?
