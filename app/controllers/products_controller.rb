@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
+    #TODO Refactor, Nasty code
     @product = Product.new(subcategory_id: params[:subcategory_id])
     @subcategory_names = Subcategory.all.map{|sub| [sub.name, sub.id] }
     @supplier_names = Supplier.all.map{|sup| [sup.company, sup.id]}

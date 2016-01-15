@@ -24,3 +24,7 @@ en:
   variants:
       no_products: 'No products to display.'
       variants_of: 'Variants of %{product}'
+      back_to_variants: 'Back to variants'
+      tax_rate: 'Tax Rate'
+      no_tax: 'No Tax Rate Selected'
+      pricing: 'Pricing'
