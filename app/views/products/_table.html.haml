@@ -1,0 +1,50 @@
+- model_class = Product
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  = form_tag new_product_path, method: :get 
+  = submit_tag "new", name: nil, :class => 'btn btn-primary'
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th{:width => '10%'}= model_class.human_attribute_name(:sku)
+      %th{:width => '35%'}= model_class.human_attribute_name(:name)
+      %th{:width => '25%'}= t('products.price_variants')
+      %th{:width => '15%'}= t('products.stock')
+      - if !products.empty?
+        - products.last.properties.keys.each do |prop|
+          %th= model_class.human_attribute_name(prop)
+      %th{:width => '15%'}=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - if products.empty?
+      %tr.empty
+      %td{:colspan => 5}= t('products.no_products')
+    - else
+      - categories.each do |category|
+        - category.subcategories.each do |subcategory|
+          %tr
+          -if subcategory.has_products?
+            %th{:colspan => 5}= link_to t(subcategory.name, :default => subcategory.name), category_subcategory_path(subcategory.category, subcategory), :class => 'btn btn-info btn-xs'
+            - subcategory.products.each do |product|
+              %tr
+                %td= link_to product.skuid, product_path(product)
+                %td= product.name
+                - if product.has_variants?
+                  %td.multistage{:colspan => 2}
+                    %table.table.table-bordered#inner-table
+                      - product.variants.each do |variant|
+                        %tr
+                          %td{:width => '50%'}= link_to variant.name, edit_product_variant_path(product, variant)
+                          %td{:width => '25%'}= number_to_currency variant.price
+                          %td{:width => '25%'}= variant.quantity
+                - else
+                  %td= number_to_currency product.price
+                  %td= product.quantity
+                - products.last.properties.values.each do |val|
+                  %td= val
+                %td
+                  = link_to t('.edit', :default => t("helpers.links.edit")), edit_product_path(product), :class => 'btn btn-default btn-xs'
+                  = link_to t('variants.add_variants'), [:new, product, :variant], :class => 'btn btn-primary btn-xs'
+                  = link_to t('.destroy', :default => t("helpers.links.destroy")), product_path(product), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+
+

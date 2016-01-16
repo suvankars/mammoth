@@ -43,13 +43,13 @@
           = bootstrap_flash
           = yield
         .col-lg-3
-          .well.sidebar-nav
-            %h3 Search category
-            %ul.nav.nav-list
-              %li= link_to "Link 1", "/#"
-              = form_tag categories_path, :class => "navbar-search pull-left", :method => :get do
-                = text_field_tag :name, nil, :class => "search-query span3", :placeholder => "Search category"
-                = button_to 'Find'
+          / .well.sidebar-nav
+          /   %h3 Search category
+          /   %ul.nav.nav-list
+          /     %li= link_to "Link 1", "/#"
+          /     = form_tag categories_path, :class => "navbar-search pull-left", :method => :get do
+          /       = text_field_tag :name, nil, :class => "search-query span3", :placeholder => "Search category"
+          /       = button_to 'Find'
       /%footer
       /  %p &copy; Mammoth Company 2015
 

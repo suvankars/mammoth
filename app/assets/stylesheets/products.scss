@@ -1,3 +1,39 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table.table.table-striped {
+  thead th { border:1px solid #40454D; background:#40454D; text-align:left; font-weight:normal; font-size:0.9em; color:#fff; }
+}
+
+table.table.table-bordered {
+  thead th { border:1px solid #40454D; background:#40454D; text-align:left; font-weight:normal; font-size:0.9em; color:#fff; }
+
+  tbody th { text-align:left; background:#5B6270; border:1px solid #5B6270;font-size:1.2em; color:#fff;}
+  tbody td.multistage {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  tbody td.multistage {
+    padding:0;
+    order-bottom-width:0px;
+    margin-bottom: 0px;
+    table.table.table-bordered {
+      td { padding:10px; border-width:0; border-right-width:1px; border-bottom-width:1px;}
+      td:last-child { border-right-width:0;}
+      tr:last-child td { border-bottom-width:1;}
+    }
+  }
+  
+}
+
+#inner-table {
+    order-bottom-width:0px;
+    margin-bottom: 0px;
+    background: rgba(247, 247, 248, 0.52);
+  }
+
+.col-lg-9 {
+  width: 100%;
+}

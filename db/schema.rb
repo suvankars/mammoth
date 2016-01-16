@@ -96,17 +96,15 @@ ActiveRecord::Schema.define(version: 20160115070124) do
     t.text     "description"
     t.text     "short_description"
     t.boolean  "active",                                    default: true
-    t.decimal  "quantity",          precision: 8, scale: 2, default: 0.0
+    t.integer  "quantity"
     t.decimal  "price",             precision: 8, scale: 2, default: 0.0
     t.decimal  "cost_price",        precision: 8, scale: 2, default: 0.0
     t.boolean  "stock_control",                             default: true
+    t.integer  "subcategory_id"
     t.integer  "parent_id"
     t.datetime "created_at",                                               null: false
     t.datetime "updated_at",                                               null: false
-    t.string   "subcategory_id"
-    t.string   "integer"
     t.string   "properties"
-    t.string   "text"
     t.integer  "supplier_id"
     t.integer  "tax_rate_id"
     t.integer  "brand_id"
@@ -116,6 +114,7 @@ ActiveRecord::Schema.define(version: 20160115070124) do
   add_index "products", ["brand_id"], name: "index_products_on_brand_id"
   add_index "products", ["parent_id"], name: "index_products_on_parent_id"
   add_index "products", ["size_id"], name: "index_products_on_size_id"
+  add_index "products", ["subcategory_id"], name: "index_products_on_subcategory_id"
   add_index "products", ["supplier_id"], name: "index_products_on_supplier_id"
   add_index "products", ["tax_rate_id"], name: "index_products_on_tax_rate_id"
 

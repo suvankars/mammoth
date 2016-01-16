@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
     @cat = Category.all
+    @categories = Category.all
   end
 
   # GET /products/1
@@ -91,6 +92,10 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :skuid, :brand_id, :tax_rate_id, :subcategory_id, :supplier_id, properties: params[:product][:properties].try(:keys))
+      params.require(:product).permit(:name, :skuid, :brand_id, :tax_rate_id, 
+                                      :subcategory_id, :supplier_id, 
+                                      :permalink, :description, :short_description, 
+                                      :price, :cost_price, :size_id, :quantity, 
+                                       properties: params[:product][:properties].try(:keys))
     end
 end

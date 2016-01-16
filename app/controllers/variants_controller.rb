@@ -19,7 +19,7 @@ class VariantsController < ApplicationController
   def create
     @product = Product.find(params[:product_id])
     @variant = @product.variants.new(variants_params)
-
+    
     if @variant.save
       redirect_to [@product, :variants], notice: 'Variant was successfully created.'
     else
@@ -27,10 +27,29 @@ class VariantsController < ApplicationController
     end
   end
 
+  def edit
+    @product = Product.find(params[:product_id])
+    @variant = @product.variants.find(params[:id])
+    render :partial => "form"
+  end
+
+  def update
+    if @variant.update(variants_params)
+      redirect_to edit_product_variant_path(@product, @variant), :notice => t('variants.update_notice')
+    else
+      render :action => "form"
+    end
+  end
+
+  def destroy
+      @variant.destroy
+      redirect_to [@product, :variants], :notice =>  t('variants.destroy_notice')
+    end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_variant
-      @product = Product.find(params[:id])
+      @product = Product.find(params[:product_id])
       @variant = @product.variants.new
     end
 

@@ -15,5 +15,6 @@ class Product < ActiveRecord::Base
   belongs_to :brand
   belongs_to :tax_rate
   belongs_to :size
+  
 
 end

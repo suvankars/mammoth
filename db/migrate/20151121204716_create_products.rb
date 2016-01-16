@@ -13,6 +13,7 @@ class CreateProducts < ActiveRecord::Migration
       t.decimal  :cost_price,            precision: 8, scale: 2, default: 0.0
       t.boolean  :stock_control,                                default: true
       
+      t.references :subcategory, index: true, foreign_key: true
       t.references :parent, index: true
       t.timestamps null: false
     end
