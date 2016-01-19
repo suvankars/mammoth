@@ -16,5 +16,8 @@ class Product < ActiveRecord::Base
   belongs_to :tax_rate
   belongs_to :size
   
+  def is_a_variant?
+      self.parent_id.nil?
+  end
 
 end

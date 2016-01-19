@@ -30,4 +30,6 @@ class Product < ActiveRecord::Base
   def has_variants?
       !variants.empty?
   end
+
+  
 end
