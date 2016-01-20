@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223190214) do
+ActiveRecord::Schema.define(version: 20160115070124) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name"
@@ -131,6 +131,13 @@ ActiveRecord::Schema.define(version: 20151223190214) do
     t.integer  "size_id"
   end
 
+  add_index "products", ["brand_id"], name: "index_products_on_brand_id"
+  add_index "products", ["parent_id"], name: "index_products_on_parent_id"
+  add_index "products", ["size_id"], name: "index_products_on_size_id"
+  add_index "products", ["subcategory_id"], name: "index_products_on_subcategory_id"
+  add_index "products", ["supplier_id"], name: "index_products_on_supplier_id"
+  add_index "products", ["tax_rate_id"], name: "index_products_on_tax_rate_id"
+
   create_table "purchase_orders", force: :cascade do |t|
     t.date     "due_date"
     t.string   "email"
@@ -145,13 +152,8 @@ ActiveRecord::Schema.define(version: 20151223190214) do
     t.datetime "updated_at",         null: false
   end
 
-  add_index "products", ["brand_id"], name: "index_products_on_brand_id"
-  add_index "products", ["parent_id"], name: "index_products_on_parent_id"
-  add_index "products", ["size_id"], name: "index_products_on_size_id"
-  add_index "products", ["subcategory_id"], name: "index_products_on_subcategory_id"
-  add_index "products", ["supplier_id"], name: "index_products_on_supplier_id"
-  add_index "products", ["tax_rate_id"], name: "index_products_on_tax_rate_id"
   add_index "purchase_orders", ["supplier_id"], name: "index_purchase_orders_on_supplier_id"
+
   create_table "sizes", force: :cascade do |t|
     t.string   "name"
     t.decimal  "volume"
