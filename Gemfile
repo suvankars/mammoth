@@ -60,3 +60,6 @@ gem 'rails_12factor', group: :production
 gem 'wicked'
 gem 'pry'
 gem 'pry-nav'
+
+gem 'rabl'
+gem 'apipie-rails'

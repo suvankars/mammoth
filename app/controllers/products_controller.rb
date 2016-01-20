@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
     @cat = Category.all
+    @categories = Category.all
   end
 
   # GET /products/1
@@ -15,13 +16,32 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
+    #TODO Refactor, Nasty code
     @product = Product.new(subcategory_id: params[:subcategory_id])
-    @product
+    @subcategory_names = Subcategory.all.map{|sub| [sub.name, sub.id] }
+    @supplier_names = Supplier.all.map{|sup| [sup.company, sup.id]}
+    @brand_names = Brand.all.map{|br| [br.name, br.id]}
+    @default_brand = @brand_names.first
+    @default_subcategory = @subcategory_names.first
+    @default_supplier  = @subcategory_names.first
+    @tax_rates = TaxRate.all.map{|tr| [tr.tax_description, tr.id]}
+    @default_tax_rate = @tax_rates.first
+
+    @sizes = Size.all.map{|s| [s.description, s.id]}
+    @default_size = @sizes.first
   end
 
   # GET /products/1/edit
   def edit
     @product = Product.find(params[:id])
+    @subcategory_names = Subcategory.all.map{|sub| [sub.name, sub.id] }
+    @supplier_names = Supplier.all.map{|sup| [sup.company, sup.id]}
+    @brand_names = Brand.all.map{|br| [br.name, br.id]}
+    @default_brand =  [@product.brand.name, @product.brand.id ]
+    @default_subcategory = [@product.subcategory.name, @product.subcategory.id]
+    @default_supplier = [@product.supplier.company, @product.supplier.id]
+    @tax_rates = TaxRate.all.map{|tr| [tr.tax_description, tr.id]}
+    @default_tax_rate = [@product.tax_rate.tax_description, @product.tax_rate.id]
   end
 
   # POST /products
@@ -72,6 +92,10 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :skuid, :brand, :subcategory_id, properties: params[:product][:properties].try(:keys))
+      params.require(:product).permit(:name, :skuid, :brand_id, :tax_rate_id, 
+                                      :subcategory_id, :supplier_id, 
+                                      :permalink, :description, :short_description, 
+                                      :price, :cost_price, :size_id, :quantity, 
+                                       properties: params[:product][:properties].try(:keys))
     end
 end

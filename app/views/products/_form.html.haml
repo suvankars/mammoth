@@ -2,12 +2,33 @@
   = f.hidden_field :subcategory_id
   = f.input :name
   = error_span(@product[:name])
+  = f.input :supplier_id, collection: @supplier_names, :selected => @default_supplier 
+  = f.input :subcategory_id, :label => "Product Category", :collection => @subcategory_names, :selected => @default_subcategory
+  = f.input :brand_id, :label => "Brand", :collection => @brand_names, :selected => @default_brand
+  = error_span(@product[:brand])
   = f.input :skuid
   = error_span(@product[:skuid])
-  = f.input :brand
-  = error_span(@product[:brand])
+  = f.input :permalink
+  = error_span(@product[:permalink])
+  = f.input :description
+  = error_span(@product[:description])
+  = f.input :short_description
+  = error_span(@product[:short_description])
+
+  = f.input :price
+  = error_span(@product[:price])
+  = f.input :cost_price
+  = error_span(@product[:cost_price])
+  = f.input :tax_rate_id, :collection => @tax_rates, :selected => @default_tax_rate
+
+  = f.input :size_id, :collection => @sizes, :selected => @default_size
+    
+  = f.input :quantity
+  = error_span(@product[:quantity])
+   
   = f.fields_for :properties, OpenStruct.new(@product.properties) do |builder|
-    - @product.subcategory.fields.each do |field|
-      = render "products/fields/#{field.field_type}", field: field, f:builder 
+    - if !@product.subcategory.nil?
+      - @product.subcategory.fields.each do |field|
+        = render "products/fields/#{field.field_type}", field: field, f:builder 
   = f.button :submit, :class => 'btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), products_path, :class => 'btn btn-default'

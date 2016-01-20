@@ -36,6 +36,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    apipie-rails (0.3.5)
+      json
     arel (6.0.3)
     babel-source (5.8.34)
     babel-transpiler (0.7.0)
@@ -116,6 +118,8 @@ GEM
       slop (~> 3.4)
     pry-nav (0.2.4)
       pry (>= 0.9.10, < 0.11.0)
+    rabl (0.11.8)
+      activesupport (>= 2.3.14)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -216,6 +220,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  apipie-rails
   byebug
   coffee-rails (~> 4.1.0)
   country_select
@@ -226,6 +231,7 @@ DEPENDENCIES
   pg
   pry
   pry-nav
+  rabl
   rails (= 4.2.5)
   rails_12factor
   react-rails

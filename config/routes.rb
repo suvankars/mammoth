@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
   
-  get 'purchase_orders/index'
 
+  apipie
+  namespace :api do
+      namespace :v1 do
+        resources :products
+        resources :categories
+      end
+  end
+  resources :sizes
+  resources :tax_rates
+  resources :brands
+ 
   scope "suppliers/:supplier_id" do
     resources :registration_steps
   end
@@ -17,7 +27,9 @@ Rails.application.routes.draw do
   
   get 'dashboard' => 'dashboard#index'
 
-  resources :products
+  resources :products do
+    resources :variants
+  end
 
   resources :categories do
     resources :subcategories
